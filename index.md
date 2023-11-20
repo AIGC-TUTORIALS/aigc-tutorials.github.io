@@ -1,215 +1,130 @@
 # AIGC Tutorials 
 
-## 📜 Content
-- [👋 Introduction](#-introduction)
-- [💬 Large Language Models](#-large-language-models)
-  - [💡 Prompt Engineering](#-prompt-engineering)
-  - [🔧 LLMs in Practice](#-llms-in-practice)
-  - [🔬 Theory of LLMs](#-theory-of-llms)
-- [🎨 AI Painting](#-ai-painting)
-  - [🧑‍🎨 Art Fundamentals and AI Painting Techniques](#-art-fundamentals-and-ai-painting-techniques)
-  - [🌊 Stable Diffusion Principles and Applications](#-stable-diffusion-principles-and-applications)
-- [🔊 AI Audio](#-ai-audio)
-- [🌈 Multimodal](#-multimodal)
-- [🧠 Deep Learning](#-deep-learning)
-- [💻 AI System](#-ai-system)
-- [🗂 Miscellaneous](#-miscellaneous)
-  - [✨ Star History](#-star-history)
-  - [🤝 Friendship Links](#-friendship-links)
+## 📜 目录
+- [👋 入门](#-入门)
+- [💬 大语言模型](#-大语言模型)
+  - [💡 提示工程](#-提示工程)
+  - [🔧 大语言模型实践](#-大语言模型实践)
+  - [🔬 大语言模型理论](#-大语言模型理论)
+- [🎨 AI绘画](#-ai绘画)
+  - [🧑‍🎨 艺术基础与AI绘画技巧](#-艺术基础与ai绘画技巧)
+  - [🌊 Stable Diffusion原理与应用](#-stable-diffusion原理与应用) 
+- [🔊 AI音频](#-ai音频)
+- [🌈 多模态](#-多模态)
+- [🧠 深度学习](#-深度学习)
+- [💻 AI系统](#-ai系统)
+- [🗂 其他](#-其他)
+  - [✨ 点赞历史](#-点赞历史)
+  - [🤝 友情链接](#-友情链接)
 
-## 👋 Introduction
-- [AI for Everyone - Andrew Ng](https://www.deeplearning.ai/courses/ai-for-everyone/)
-  ![](https://img.shields.io/badge/Level-Easy-green)
-  ![](https://img.shields.io/badge/Video-blue)
-  - "AI for Everyone" is a beginner's guide to understanding AI's practical applications, its limitations, and its societal impact, ideal for business professionals and leaders alike.
-- [Practical AI for Teachers and Students - Wharton School](https://www.youtube.com/playlist?list=PLwRdpYzPkkn302_rL5RrXvQE8j0jLP02j)
-  ![](https://img.shields.io/badge/Level-Easy-green)
-  ![](https://img.shields.io/badge/Video-blue)
-  - Wharton Interactive's crash course delves into the mechanics and impacts of LLMs, spotlighting models like OpenAI's ChatGPT4, Microsoft's Bing in Creative Mode, and Google's Bard. 
-- [Artificial Intelligence for Beginners - Microsoft](https://microsoft.github.io/AI-For-Beginners/)
-  ![](https://img.shields.io/badge/Level-Medium-yellow)
-  - This 12-week Microsoft curriculum dives deep into AI methodologies, spanning symbolic AI to neural networks, while highlighting TensorFlow and PyTorch frameworks, yet omits business applications, classic machine learning, and certain cloud-specific topics.
-- [Generative AI learning path - Google Cloud](https://www.cloudskillsboost.google/journeys/118)
-  ![](https://img.shields.io/badge/Level-Medium-yellow)
-  ![](https://img.shields.io/badge/Video-blue)
-  - This learning path offers a comprehensive journey from the basics of Large Language Models to deploying generative AI solutions on Google Cloud. 
 
-## 💬 Large Language Models
+## 👋 入门
+- [AI for Everyone - 吴恩达](https://www.deeplearning.ai/courses/ai-for-everyone/)
+  ![](https://img.shields.io/badge/Level-简单-green)
+  ![](https://img.shields.io/badge/视频-blue)
+- [Practical AI for Teachers and Students - 沃顿商学院](https://www.youtube.com/playlist?list=PLwRdpYzPkkn302_rL5RrXvQE8j0jLP02j)
+  ![](https://img.shields.io/badge/Level-简单-green)
+  ![](https://img.shields.io/badge/视频-blue)
+- [Artificial Intelligence for Beginners - 微软](https://microsoft.github.io/AI-For-Beginners/)
+  ![](https://img.shields.io/badge/Level-中等-yellow)
+- [Generative AI learning path - 谷歌](https://www.cloudskillsboost.google/journeys/118)
+  ![](https://img.shields.io/badge/Level-中等-yellow)
+  ![](https://img.shields.io/badge/视频-blue)
 
-### 💡 Prompt Engineering
-- [ChatGPT Prompt Engineering for Developers - DeepLearning.AI](https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/) ![](https://img.shields.io/badge/Level-Easy-green)
-  ![](https://img.shields.io/badge/Video-blue)
-  ![](https://img.shields.io/badge/Notebook-orange)
-  - Co-taught by OpenAI and DeepLearning.AI, this course guides learners in leveraging Large Language Models for tasks like summarizing and text transformation, with hands-on experiences in a Jupyter notebook environment.
+## 💬 大语言模型
+
+### 💡 提示工程
+- [ChatGPT Prompt Engineering for Developers - DeepLearning.AI](https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/)
+  ![](https://img.shields.io/badge/Level-简单-green)
+  ![](https://img.shields.io/badge/视频-blue) 
 - [Building Systems with the ChatGPT API - DeepLearning.AI](https://www.deeplearning.ai/short-courses/building-systems-with-chatgpt/)
-  ![](https://img.shields.io/badge/Level-Easy-green)
-  ![](https://img.shields.io/badge/Video-blue)
-  ![](https://img.shields.io/badge/Notebook-orange)
-  - Led by experts from OpenAI and DeepLearning.AI, this course teaches automating workflows using language models, creating prompt chains, integrating Python, and designing chatbots, all through hands-on Jupyter notebook exercises with just basic Python knowledge required.
+  ![](https://img.shields.io/badge/Level-简单-green)
+  ![](https://img.shields.io/badge/视频-blue)
 - [LangChain for LLM Application Development - DeepLearning.AI](https://www.deeplearning.ai/short-courses/langchain-for-llm-application-development/)
-  ![](https://img.shields.io/badge/Level-Easy-green)
+  ![](https://img.shields.io/badge/Level-简单-green)
   ![](https://img.shields.io/badge/Video-blue)
-  ![](https://img.shields.io/badge/Notebook-orange)
-  - Guided by the creator of LangChain and Andrew Ng, this course dives into advanced LLM techniques like chaining operations and using models as reasoning agents, empowering learners to craft robust applications quickly with foundational Python knowledge.
 - [LangChain: Chat with Your Data - DeepLearning.AI](https://www.deeplearning.ai/short-courses/langchain-chat-with-your-data/)
-  ![](https://img.shields.io/badge/Level-Easy-green)
-  ![](https://img.shields.io/badge/Video-blue)
-  ![](https://img.shields.io/badge/Notebook-orange)
-  - Delve into Retrieval Augmented Generation and chatbot creation based on document content with LangChain, covering data loading, splitting, embeddings, advanced retrieval techniques, and interactive chatbot building, designed for Python-savvy developers keen on harnessing Large Language Models.
-- [Prompt Engineering for ChatGPT - Vanderbilt University](https://www.coursera.org/learn/prompt-engineering?utm_medium=sem&utm_source=gg&utm_campaign=B2C_EMEA_prompt-engineering_vanderbilt_FTCOF_learn_country-GB-country-UK&campaignid=20462816306&adgroupid=157715342052&device=c&keyword=prompt%20engineering%20coursera&matchtype=b&network=g&devicemodel=&adposition=&creativeid=670151312123&hide_mobile_promo&gclid=Cj0KCQjwuZGnBhD1ARIsACxbAVg8RCaUF0lwFyVnMuP7T7bHoH0jST0XXhQ3S1vmDxtZc8O1WlJ8FXQaAtG-EALw_wcB)
-  ![](https://img.shields.io/badge/Level-Easy-green)
-  ![](https://img.shields.io/badge/Video-blue)
-  - Unlock the potential of Large Language Models like ChatGPT by mastering prompt engineering, transitioning from basic to sophisticated prompts, enabling diverse applications ranging from writing to simulation, suitable for anyone with basic computer skills.
-- [Prompt Engineering Guide - DAIR.AI](https://www.promptingguide.ai/)
-  ![](https://img.shields.io/badge/Level-Easy-green) 
-  - This guide introduces Prompt Engineering, a discipline that optimizes interactions with Large Language Models, offering extensive resources, research, and tools.
+  ![](https://img.shields.io/badge/Level-简单-green)
+  ![](https://img.shields.io/badge/视频-blue)
+- [Prompt Engineering for ChatGPT - 范德堡大学](https://www.coursera.org/learn/prompt-engineering?utm_medium=sem&utm_source=gg&utm_campaign=B2C_EMEA_prompt-engineering_vanderbilt_FTCOF_learn_country-GB-country-UK&campaignid=20462816306&adgroupid=157715342052&device=c&keyword=prompt%20engineering%20coursera&matchtype=b&network=g&devicemodel=&adposition=&creativeid=670151312123&hide_mobile_promo&gclid=Cj0KCQjwuZGnBhD1ARIsACxbAVg8RCaUF0lwFyVnMuP7T7bHoH0jST0XXhQ3S1vmDxtZc8O1WlJ8FXQaAtG-EALw_wcB)
+  ![](https://img.shields.io/badge/Level-简单-green)
+  ![](https://img.shields.io/badge/视频-blue)
 - [Learn Prompting](https://learnprompting.org/)
-  ![](https://img.shields.io/badge/Level-Medium-yellow)
-  - Dive into a beginner-friendly guide on Generative AI and Prompt Engineering, offering insights from industry giants, and explore how these tools revolutionize content creation and the future of work.
-- [LangChain AI Handbook - James Briggs and Francisco Ingham](https://www.pinecone.io/learn/series/langchain/)
-  ![](https://img.shields.io/badge/Level-Medium-yellow)
-  ![](https://img.shields.io/badge/Book-%2391672c)
-  - Explore the transformative world of LangChain, mastering core components, crafting effective prompts, and harnessing advanced AI agents, conversational memories, and custom tools for cutting-edge applications. 
-
-### 🔧 LLMs in Practice
-- [LLM Bootcamp - The Full Stack](https://fullstackdeeplearning.com/llm-bootcamp/spring-2023/)
-  ![](https://img.shields.io/badge/Level-Medium-yellow)
-  ![](https://img.shields.io/badge/Video-blue)
-  - Delve deep into prompt engineering, LLM operations, user experience design for language interfaces, augmented language model techniques, foundational LLM insights, hands-on projects, and the future of LLMs, complemented by expert talks from industry leaders on training and agent design.
-- [Finetuning Large Language Models - DeepLearning.AI](https://www.deeplearning.ai/short-courses/finetuning-large-language-models/)
-  ![](https://img.shields.io/badge/Level-Medium-yellow)
-  ![](https://img.shields.io/badge/Video-blue)
-  ![](https://img.shields.io/badge/Notebook-orange)
-  - Learn the techniques of finetuning large language models (LLMs) with Sharon Zhou, gaining expertise in data preparation, training, and updating neural net weights for improved results tailored to your data.
-- [TinyML and Efficient Deep Learning Computing - Massachusetts Institute of Technology](https://hanlab.mit.edu/courses/2023-fall-65940?schedule)
-  ![](https://img.shields.io/badge/Level-Medium-yellow)
-  ![](https://img.shields.io/badge/Video-blue)
-  - This course explores efficient AI computing techniques for deep learning on constrained devices, covering model compression, pruning, quantization, architecture search, distributed training, and quantum machine learning, with hands-on deployment of large models like LLaMA 2 on laptops.
-- [Learn the fundamentals of generative AI for real-world applications - AWS x DeepLearning.AI](https://www.deeplearning.ai/courses/generative-ai-with-llms/)
-  ![](https://img.shields.io/badge/Level-Medium-yellow)
-  ![](https://img.shields.io/badge/Video-blue)
-  - This course, in partnership with AWS, offers deep insights into generative AI and Large Language Models (LLMs). Participants will learn the mechanics, optimization, and real-world applications of LLMs from AWS AI experts. Suitable for professionals in AI and machine learning, with a Coursera certificate upon completion. Basic Python and machine learning knowledge recommended.
-
-### 🔬 Theory of LLMs
-- [CS324 - Advances in Foundation Models - Stanford University](https://stanford-cs324.github.io/winter2023/)
-  ![](https://img.shields.io/badge/Level-Easy-green)
-  - CS 324 delves into foundation models like GPT-3 and DALL-E, covering their principles, systems, ethics, and application, and culminates in a hands-on research project or application design.
-- [CS 601.471/671 NLP: Self-supervised Models - Johns Hopkins University](https://self-supervised.cs.jhu.edu/sp2023/index.html)
-  ![](https://img.shields.io/badge/Level-Medium-yellow)
-  - This course offers an in-depth exploration of self-supervised learning techniques for NLP, training students to design and implement neural network models using PyTorch, with a focus on various language model architectures.
-- [11-667: Large Language Models Methods and Applications - Carnegie Mellon University](https://cmu-llms.org/)
-  ![](https://img.shields.io/badge/Level-Medium-yellow)
-  - This graduate course offers a comprehensive overview of large language models (LLMs), covering basics, emergent capabilities, applications, scaling techniques, deployment concerns, and future challenges, equipping students for research and applications in the AI era.
-- [CS224N: Natural Language Processing with Deep Learning - Stanford University](https://web.stanford.edu/class/cs224n/)
-  ![](https://img.shields.io/badge/Level-Medium-yellow)
-  ![](https://img.shields.io/badge/Video-blue)
-  - This course provides a comprehensive insight into Deep Learning for NLP using PyTorch, emphasizing end-to-end neural models, eliminating the need for task-specific feature engineering, and equipping students with the skills to craft their own neural network solutions.
-- [Speech and Language Processing - Dan Jurafsky and James H. Martin](https://web.stanford.edu/~jurafsky/slp3/)
-  ![](https://img.shields.io/badge/Level-Medium-yellow)
-  ![](https://img.shields.io/badge/Book-%2391672c)
-  - Authored by leading experts in the field, this authoritative text provides an in-depth exploration of the algorithms and mathematical models for modern natural language processing and speech recognition, and is continually updated to reflect the rapid advancements in the NLP domain.
-- [COS 597G (Fall 2022): Understanding Large Language Models - Princeton University](https://www.cs.princeton.edu/courses/archive/fall22/cos597G/)
-  ![](https://img.shields.io/badge/Level-Hard-red)
-  - An advanced exploration into the transformative realm of LLMs, discussing state-of-the-art models, their profound capabilities, and associated challenges, with an emphasis on in-depth research, ethical considerations, and hands-on project experience, tailored for seasoned students versed in machine learning and deep NLP frameworks.
-
-## 🎨 AI Painting
-
-### 🧑‍🎨 Art Fundamentals and AI Painting Techniques
-- [Lecture Series: An interesting topic every week on the fundamentals of art - Niji Academy](https://www.niji.academy/work/lecture)
-  ![](https://img.shields.io/badge/Level-Easy-green)
-  - Niji Academy blends art fundamentals with AI, elevating painting skills and speeding up art learning.
- 
-### 🌊 Stable Diffusion Principles and Applications
-
-- [How Diffusion Models Work - DeepLearning.AI](https://www.deeplearning.ai/short-courses/how-diffusion-models-work/)
-  ![](https://img.shields.io/badge/Level-Medium-yellow) ![](https://img.shields.io/badge/Video-blue)
-  ![](https://img.shields.io/badge/Notebook-orange)
-  - Master generative AI in 'How Diffusion Models Work', an intermediate course by Sharon Zhou, where you'll craft diffusion models from scratch, enriched with hands-on coding and labs, ideal for those proficient in Python, Tensorflow, or Pytorch.
-- [Hugging Face Diffusion Models Course](https://github.com/huggingface/diffusion-models-class)
-  ![](https://img.shields.io/badge/Level-Medium-yellow)
-  ![](https://img.shields.io/badge/Notebook-orange)
-  - The Hugging Face course offers an in-depth look into diffusion models, guiding participants through media generation, hands-on training, and customization using the Diffusers library, with a foundational understanding of Python and Deep Learning essential for the best experience.
-- [Practical Deep Learning for Coders part 2: Deep Learning Foundations to Stable Diffusion - fast.ai](https://course.fast.ai/Lessons/part2.html)
-  ![](https://img.shields.io/badge/Level-Medium-yellow)
-  ![](https://img.shields.io/badge/Video-blue)
-  - This course offers an in-depth exploration of Stable Diffusion algorithms, covering advanced deep learning techniques and hands-on projects using PyTorch, empowering students with expertise in cutting-edge diffusion models. 
-
-## 🔊 AI Audio
-- [Hugging Face Audio Course](https://huggingface.co/learn/audio-course/chapter0/introduction)
-  ![](https://img.shields.io/badge/Level-Medium-yellow) 
-  - The Hugging Face Audio course teaches how to use transformers for various audio tasks, from speech recognition to generating speech from text, combining theory with hands-on exercises for learners familiar with deep learning.
-- [CS224S: Spoken Language Processing - Stanford University](http://web.stanford.edu/class/cs224s/)
-  ![](https://img.shields.io/badge/Level-Medium-yellow)
-  - An immersive course on spoken language technology, covering dialog systems, deep learning in speech recognition and synthesis, with hands-on projects using modern tools like PyTorch, Alexa Skills Kit, and SpeechBrain, culminating in student-driven research or system design projects. 
- 
-## 🌈 Multimodal
-- [Tutorial on MultiModal Machine Learning (ICML 2023) - Carnegie Mellon University](https://cmu-multicomp-lab.github.io/mmml-tutorial/icml2023/)
-  ![](https://img.shields.io/badge/Level-Medium-yellow)
-  ![](https://img.shields.io/badge/Video-blue)
-  - This course offers an in-depth look at Multimodal Machine Learning, drawing insights from the latest edition of a survey paper and CMU's academic teachings, addressing its unique challenges and future directions. 
-- [11-777: MultiModal Machine Learning (Fall 2022) - Carnegie Mellon University](https://cmu-multicomp-lab.github.io/mmml-course/fall2022/)
-  ![](https://img.shields.io/badge/Level-Medium-yellow)
-  ![](https://img.shields.io/badge/Video-blue)
-  - This course delves into Multimodal Machine Learning (MMML), covering its mathematical foundations, state-of-the-art probabilistic models, and key challenges, while highlighting recent applications and techniques such as multimodal transformers and neuro-symbolic models. 
-- [11-877: Advanced Topics in MultiModal Machine Learning (Fall 2022) - Carnegie Mellon University](https://cmu-multicomp-lab.github.io/adv-mmml-course/spring2022/)
-  ![](https://img.shields.io/badge/Level-Hard-red)
-  - This course explores Multimodal Machine Learning (MMML), covering technical challenges and recent achievements. It emphasizes critical thinking and future research trends, with weekly updates, discussion probes, and research highlights on the course website. 
-
-## 🧠 Deep Learning
-- [Neural Networks/Deep Learning - StatQuest](https://www.youtube.com/playlist?list=PLblh5JKOoLUIxGDQs4LFFD--41Vzf-ME1)
-  ![](https://img.shields.io/badge/Level-Easy-green)
-  ![](https://img.shields.io/badge/Video-blue)
-  - Discover the intricacies of Neural Networks in this highly popular YouTube playlist, seamlessly blending informative graphics with expert teachings, captivating countless students from basics to advanced image classification with Convolutional Neural Networks.
-- [Neural Networks - 3Blue1Brown](https://www.3blue1brown.com/topics/neural-networks)
-  ![](https://img.shields.io/badge/Level-Easy-green)
-  ![](https://img.shields.io/badge/Video-blue)
-  - 3Blue1Brown unveils the magic of neural networks through vivid animations and clear explanations, diving deep into hand-written digit recognition, the nuances of gradient descent, and the intricate calculus behind backpropagation. 
-- [Neural Networks: Zero to Hero - Andrej Karpathy](https://karpathy.ai/zero-to-hero.html)
-  ![](https://img.shields.io/badge/Level-Medium-yellow)
-  ![](https://img.shields.io/badge/Video-blue)
-  - Andrej Karpathy's course guides students from the foundational backpropagation to advanced neural networks like GPT, emphasizing language models as a versatile gateway to mastering deep learning, with prerequisites in Python programming and basic math. 
-- [Practical Deep Learning for Coders - fast.ai](https://course.fast.ai/)
-  ![](https://img.shields.io/badge/Level-Medium-yellow)
-  ![](https://img.shields.io/badge/Video-blue)
-  - Practical Deep Learning for Coders 2022 is a free course offering hands-on experience in building, training, and deploying deep learning models across various domains using tools like PyTorch and fastai, suitable for those with coding knowledge and without the need for advanced math. 
-- [Deep Learning Specialization - Andrew Ng](https://www.deeplearning.ai/courses/deep-learning-specialization/)
-  ![](https://img.shields.io/badge/Level-Medium-yellow)
-  ![](https://img.shields.io/badge/Video-blue)
-  - Andrew Ng's Deep Learning Specialization is a top-rated, self-paced program on Coursera with over 1 million learners, offering clear modules and practical techniques in AI, supported by a vast community and breaking down the latest in machine learning into understandable content.
-- [6.S191: Introduction to Deep Learning - Massachusetts Institute of Technology](http://introtodeeplearning.com/)
-  ![](https://img.shields.io/badge/Level-Medium-yellow)
-  ![](https://img.shields.io/badge/Video-blue)
-  - MIT's intensive bootcamp on deep learning fundamentals, covering applications from computer vision to biology, with hands-on TensorFlow practice and a culminating project competition. Basic calculus and linear algebra knowledge required; Python experience beneficial. 
-- [CS25: Transformers United V2 - Stanford University](https://web.stanford.edu/class/cs25/)
-  ![](https://img.shields.io/badge/Level-Medium-yellow)
-  ![](https://img.shields.io/badge/Video-blue)
-  - Explore the transformative power of transformers in deep learning across diverse domains, from NLP to biology, in a seminar featuring expert lectures, breakthrough discussions, and insights from leading researchers, aiming to foster understanding and cross-collaborative innovation.
-- [Deep Learning Lecture Series 2020 - DeepMind x University College London](https://www.deepmind.com/learning-resources/deep-learning-lecture-series-2020)
-  ![](https://img.shields.io/badge/Level-Medium-yellow)
-  ![](https://img.shields.io/badge/Video-blue)
-  - DeepMind presents a 12-lecture series on Deep Learning, diving from foundational topics to advanced techniques, encompassing areas from object recognition to responsible AI innovation, all delivered by leading research experts.
-- [Reinforcement Learning Lecture Series 2021 - DeepMind x University College London](https://www.deepmind.com/learning-resources/reinforcement-learning-lecture-series-2021)
-  ![](https://img.shields.io/badge/Level-Hard-red)
-  ![](https://img.shields.io/badge/Video-blue)
-  - DeepMind and UCL present a comprehensive 13-lecture series on modern reinforcement learning, from foundational concepts to advanced deep RL techniques, led by expert researchers Hado van Hasselt, Diana Borsa, and Matteo Hessel.
+  ![](https://img.shields.io/badge/Level-中等-yellow)
+- [LangChain AI Handbook - James Briggs, Francisco Ingham](https://www.pinecone.io/learn/series/langchain/)
+  ![](https://img.shields.io/badge/Level-中等-yellow)
+  ![](https://img.shields.io/badge/书籍-%2391672c)
   
-## 💻 AI System
-- [AI-Sys-Sp22 Machine Learning Systems - University of California, Berkeley](https://ucbrise.github.io/cs294-ai-sys-sp22/)
-  ![](https://img.shields.io/badge/Level-Medium-yellow)
-  - Delve into the symbiotic relationship between cutting-edge AI applications and the systems supporting them, exploring advancements in hardware, software, and AI-driven optimization techniques, through lectures, discussions, and collaborative hands-on projects. 
-- [Deep Learning Systems: Algorithms and Implementation - Tianqi Chen, Zico Kolter](https://dlsyscourse.org/)
-  ![](https://img.shields.io/badge/Level-Medium-yellow)
-  ![](https://img.shields.io/badge/Video-blue)
-  - Explore the foundations of deep learning systems by constructing a complete library, understanding every layer from model design to efficient algorithms, utilizing Python and C/C++. 
-- [CS 329S: Machine Learning Systems Design - Stanford University](https://stanford-cs329s.github.io/)
-  ![](https://img.shields.io/badge/Level-Medium-yellow)
-  - Master the intricacies of designing robust, scalable, and deployable machine learning systems, focusing on stakeholders, evolving requirements, and holistic system design, while addressing critical issues like privacy, fairness, and security. 
-- [15-849: Machine Learning Systems - Carnegie Mellon University](https://www.cs.cmu.edu/~zhihaoj2/15-849/)
-  ![](https://img.shields.io/badge/Level-Hard-red)
-  - Dive into the architecture of modern ML systems, unraveling the journey from high-level model design to low-level kernel execution on heterogeneous hardware, while uncovering the principles and challenges of next-gen ML applications and platforms. 
-- [Computer Science 598D - Systems and Machine Learning - Princeton University](https://www.cs.princeton.edu/courses/archive/spring21/cos598D/general.html)
-  ![](https://img.shields.io/badge/Level-Hard-red)
-  - Explore the synergy between systems and machine learning by dissecting recent research on efficient ML hardware/software and applying ML to system design, culminating in hands-on projects and deep discussions for graduate students.
+### 🔧 大语言模型实践
+- [LLM Bootcamp - The Full Stack](https://fullstackdeeplearning.com/llm-bootcamp/spring-2023/)
+  ![](https://img.shields.io/badge/Level-中等-yellow)
+  ![](https://img.shields.io/badge/视频-blue)
+- [Finetuning Large Language Models - DeepLearning.AI](https://www.deeplearning.ai/short-courses/finetuning-large-language-models/)
+  ![](https://img.shields.io/badge/Level-中等-yellow)
+  ![](https://img.shields.io/badge/视频-blue)
+
+### 🔬 大语言模型理论
+- [CS324 - Advances in Foundation Models - 斯坦福大学](https://stanford-cs324.github.io/winter2023/)
+  ![](https://img.shields.io/badge/Level-简单-green)
+  - 斯坦福大学关于大模型的新课，主要材料是一些notes，介绍了大语言模型的基础知识、能力范围、训练部署以及一些大模型相关的问题（数据安全、法律、危害等），总体来说比较简单，适合入门。2023年的版本对课纲进行了更新，增加了关于图像-文本和多模态的大模型内容。
+- [CS 601.471/671 NLP: Self-supervised Models - 约翰霍普金斯大学](https://self-supervised.cs.jhu.edu/sp2023/index.html)
+  ![](https://img.shields.io/badge/Level-中等-yellow)
+  - JHU也是NLP大牛校，这门课难度适中，课程主页上各类资源还挺多的，建议大家看一看。 
+- [CS224N: Natural Language Processing with Deep Learning - 斯坦福大学](https://web.stanford.edu/class/cs224n/)
+  ![](https://img.shields.io/badge/Level-中等-yellow)
+  ![](https://img.shields.io/badge/视频-blue)
+  - 这门课Christopher Manning在斯坦福开了很多年，很经典的课程。前面是NLP的基础知识，后面几节课会涉及到大语言模型。 
+- [Speech and Language Processing - Dan Jurafsky and James H. Martin](https://web.stanford.edu/~jurafsky/slp3/)
+  ![](https://img.shields.io/badge/Level-中等-yellow)
+  ![](https://img.shields.io/badge/书籍-%2391672c)
+  - 最经典的NLP教材，本来计划在大概三四年前就完稿的，但是由于近几年NLP领域发展实在太快，作者干脆就不设DDL了，一直在持续更新中。 
+- [COS 597G (Fall 2022): Understanding Large Language Models - 普林斯顿大学](https://www.cs.princeton.edu/courses/archive/fall22/cos597G/)
+  ![](https://img.shields.io/badge/Level-困难-red)
+  - Danqi Chen的课，课程难度较高，主要材料是PPT和相关的论文，适合深入LLM某个方向的同学。 
+
+## 🎨 AI绘画
+
+### 🧑‍🎨 艺术基础与AI绘画技巧
+- [系列讲座:每周一个关于艺术基础的有趣话题 - Niji Academy](https://www.niji.academy/work/lecture) [[中文版]](https://mp.weixin.qq.com/s/CxEv5NQF_wzAtqXnuNbKog) ![](https://img.shields.io/badge/Level-简单-green)
+- [AIGCTalk-Midjourney学习手册](https://ciweicui.feishu.cn/docx/DPbidgdBeoNw55xKjO6c7ao3nbc) ![](https://img.shields.io/badge/Level-简单-green)
+- [【Midjourney】保姆级AI绘画创作系列教学课程 - 莱森](https://space.bilibili.com/630876766/channel/collectiondetail?sid=1045607) ![](https://img.shields.io/badge/Level-简单-green) ![](https://img.shields.io/badge/视频-blue)
+
+### 🌊 Stable Diffusion原理与应用
+- [【AI绘画】Stable Diffusion 系列教程](https://space.bilibili.com/12566101/channel/seriesdetail?sid=2706990) ![](https://img.shields.io/badge/Level-简单-green) ![](https://img.shields.io/badge/视频-blue)
+  - 秋葉aaaki大神喂饭级别Stable Diffusion 系列教程
+- [How Diffusion Models Work - DeepLearning.AI](https://www.deeplearning.ai/short-courses/how-diffusion-models-work/) ![](https://img.shields.io/badge/Level-中等-yellow) ![](https://img.shields.io/badge/视频-blue)
+- [扩散模型 - Diffusion Model - 李宏毅](https://www.bilibili.com/video/BV14c411J7f2/?vd_source=a4218e1e16a294070cadf4eefa94fa32) ![](https://img.shields.io/badge/Level-中等-yellow) ![](https://img.shields.io/badge/视频-blue)
+  - 偏宏观，比较通俗易懂 
+- [Diffusion扩散模型 - 唐宇迪](https://www.bilibili.com/video/BV1Re4y1s7uV/?p=1&vd_source=a4218e1e16a294070cadf4eefa94fa32) ![](https://img.shields.io/badge/Level-中等-yellow) ![](https://img.shields.io/badge/视频-blue)
+  - 唐宇迪老师讲stable diffusion和dalle推理讲的比较清楚
+- [Hugging Face Diffusion Models Course](https://github.com/huggingface/diffusion-models-class) ![](https://img.shields.io/badge/Level-中等-yellow)
+
+## 🔊 AI音频
+- [Hugging Face Audio Course](https://huggingface.co/learn/audio-course/chapter0/introduction) ![](https://img.shields.io/badge/Level-中等-yellow)
+- [CS224S: Spoken Language Processing - 斯坦福大学](http://web.stanford.edu/class/cs224s/) ![](https://img.shields.io/badge/Level-中等-yellow)
+
+## 🌈 多模态
+- [Tutorial on MultiModal Machine Learning (ICML 2023) - 卡耐基梅隆大学](https://cmu-multicomp-lab.github.io/mmml-tutorial/icml2023/) ![](https://img.shields.io/badge/Level-中等-yellow) ![](https://img.shields.io/badge/视频-blue)
+- [11-777: MultiModal Machine Learning (Fall 2022) - 卡耐基梅隆大学](https://cmu-multicomp-lab.github.io/mmml-course/fall2022/) ![](https://img.shields.io/badge/Level-中等-yellow) ![](https://img.shields.io/badge/视频-blue)
+- [11-877: Advanced Topics in MultiModal Machine Learning (Fall 2022) - 卡耐基梅隆大学](https://cmu-multicomp-lab.github.io/adv-mmml-course/spring2022/) ![](https://img.shields.io/badge/Level-困难-red)
+
+## 🧠 深度学习
+- [Neural Networks/Deep Learning - StatQuest](https://www.youtube.com/playlist?list=PLblh5JKOoLUIxGDQs4LFFD--41Vzf-ME1) ![](https://img.shields.io/badge/Level-简单-green) ![](https://img.shields.io/badge/视频-blue)
+- [Neural Networks - 3Blue1Brown](https://www.3blue1brown.com/topics/neural-networks) ![](https://img.shields.io/badge/Level-简单-green) ![](https://img.shields.io/badge/视频-blue)
+- [Neural Networks: Zero to Hero - Andrej Karpathy](https://karpathy.ai/zero-to-hero.html) ![](https://img.shields.io/badge/Level-中等-yellow) ![](https://img.shields.io/badge/视频-blue)
+- [Practical Deep Learning for Coders - fast.ai](https://course.fast.ai/) ![](https://img.shields.io/badge/Level-中等-yellow) ![](https://img.shields.io/badge/视频-blue)
+- [Deep Learning Specialization - 吴恩达](https://www.deeplearning.ai/courses/deep-learning-specialization/) ![](https://img.shields.io/badge/Level-中等-yellow) ![](https://img.shields.io/badge/视频-blue)
+- [6.S191: Introduction to Deep Learning - 麻省理工学院](http://introtodeeplearning.com/) ![](https://img.shields.io/badge/Level-中等-yellow) ![](https://img.shields.io/badge/视频-blue)
+- [CS25: Transformers United V2 - 斯坦福大学](https://web.stanford.edu/class/cs25/) ![](https://img.shields.io/badge/Level-中等-yellow) ![](https://img.shields.io/badge/视频-blue)
+- [Deep Learning Lecture Series 2020 - DeepMind x 伦敦大学学院](https://www.deepmind.com/learning-resources/deep-learning-lecture-series-2020) ![](https://img.shields.io/badge/Level-中等-yellow) ![](https://img.shields.io/badge/视频-blue)
+- [Reinforcement Learning Lecture Series 2021 - DeepMind x 伦敦大学学院](https://www.deepmind.com/learning-resources/reinforcement-learning-lecture-series-2021) ![](https://img.shields.io/badge/Level-困难-red) ![](https://img.shields.io/badge/视频-blue)
+
+## 💻 AI系统
+- [AI-Sys-Sp22 Machine Learning Systems - 加州大学伯克利分校](https://ucbrise.github.io/cs294-ai-sys-sp22/) ![](https://img.shields.io/badge/Level-中等-yellow)
+- [Deep Learning Systems: Algorithms and Implementation - Tianqi Chen, Zico Kolter](https://dlsyscourse.org/) ![](https://img.shields.io/badge/Level-中等-yellow) ![](https://img.shields.io/badge/视频-blue)
+- [CS 329S: Machine Learning Systems Design - 斯坦福大学](https://stanford-cs329s.github.io/) ![](https://img.shields.io/badge/Level-中等-yellow)
+- [15-849: Machine Learning Systems - 卡耐基梅隆大学](https://www.cs.cmu.edu/~zhihaoj2/15-849/) ![](https://img.shields.io/badge/Level-困难-red)
+- [Computer Science 598D - Systems and Machine Learning - 普林斯顿大学](https://www.cs.princeton.edu/courses/archive/spring21/cos598D/general.html) ![](https://img.shields.io/badge/Level-困难-red)
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 <span id="busuanzi_container_site_pv" style="text-align: center;">Total Visit<span id="busuanzi_value_site_pv"></span></span>
