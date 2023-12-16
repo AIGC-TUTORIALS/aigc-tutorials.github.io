@@ -1,0 +1,16 @@
+<div class="dt-article">
+	<div class="posts-list l-page">
+		{% for article in site.data.story %}
+		<div class="post-preview peer-reviewed">
+			<a href="{{ article.url }}">
+				<div class="thumbnail"><img src="{{ article.img }}"></div>
+				<div class="description">
+					<h2 class="title">{{ article.title }}</h2>
+					<p class="authors">{{ article.author }}</p>
+					<p class="abstract">{{ article.description }}</p>
+				</div>
+			</a>
+		</div>
+		{% endfor %}
+	</div>
+</div>
