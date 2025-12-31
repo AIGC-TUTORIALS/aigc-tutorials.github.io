@@ -3,91 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>个人股票交易复盘</title>
+    <title>股票交易复盘系统</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <nav class="navbar">
+        <div class="logo">📈 交易者日志</div>
+        <div class="nav-links">
+            <button onclick="showView('home')">首页汇总</button>
+            <button onclick="showView('detail')">每日复盘</button>
+        </div>
+    </nav>
+
     <div class="container">
-        <header class="header">
-            <h1>盘后总结 <span class="date">2023-10-27</span></h1>
-            <div class="summary-cards">
-                <div class="card">
-                    <p>当日盈亏</p>
-                    <h2 class="profit">+¥5,230.00</h2>
+        <section id="view-home" class="view">
+            <header class="view-header">
+                <h1>资产概览</h1>
+            </header>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>本月胜率</h3>
+                    <p class="value">64.5%</p>
                 </div>
-                <div class="card">
-                    <p>总仓位</p>
-                    <h2>65%</h2>
+                <div class="stat-card">
+                    <h3>累计盈亏</h3>
+                    <p class="value profit">+¥42,800</p>
                 </div>
-                <div class="card">
-                    <p>操作次数</p>
-                    <h2>4 笔</h2>
+                <div class="stat-card">
+                    <h3>月度交易额</h3>
+                    <p class="value">¥1,250,000</p>
                 </div>
             </div>
-        </header>
 
-        <main class="main-content">
-            <section class="section">
+            <div class="history-list">
+                <h3>最近复盘记录</h3>
+                <div class="history-item" onclick="viewDate('2023-10-27')">
+                    <span>2023-10-27</span>
+                    <span class="profit">+¥5,230</span>
+                </div>
+                <div class="history-item" onclick="viewDate('2023-10-26')">
+                    <span>2023-10-26</span>
+                    <span class="loss">-¥1,100</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-detail" class="view" style="display: none;">
+            <header class="detail-header">
+                <div class="date-picker-group">
+                    <label for="review-date">选择日期：</label>
+                    <input type="date" id="review-date" value="2023-10-27" onchange="loadDataByDate(this.value)">
+                </div>
+                <h1>当日复盘明细</h1>
+            </header>
+
+            <div class="summary-cards">
+                <div class="card"><p>当日盈亏</p><h2 id="day-profit" class="profit">+¥5,230</h2></div>
+                <div class="card"><p>仓位</p><h2>65%</h2></div>
+                <div class="card"><p>状态</p><h2>✅ 严格执行纪律</h2></div>
+            </div>
+
+            <div class="section">
                 <h3>📜 交易明细</h3>
-                <div class="table-wrapper">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>标的代码</th>
-                                <th>方向</th>
-                                <th>买入价</th>
-                                <th>卖出价</th>
-                                <th>盈亏比</th>
-                                <th>交易逻辑</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>**赛力斯 (601127)**</td>
-                                <td><span class="badge buy">买入</span></td>
-                                <td>82.50</td>
-                                <td>85.40</td>
-                                <td class="profit">+3.5%</td>
-                                <td>五日线支撑，放量突破。</td>
-                            </tr>
-                            <tr>
-                                <td>**宁德时代 (300750)**</td>
-                                <td><span class="badge sell">卖出</span></td>
-                                <td>192.10</td>
-                                <td>188.50</td>
-                                <td class="loss">-1.8%</td>
-                                <td>破位止损，执行纪律。</td>
-                            </tr>
+                <table>
+                    <thead>
+                        <tr><th>标的</th><th>动作</th><th>价格</th><th>盈亏</th><th>备注</th></tr>
+                    </thead>
+                    <tbody id="trade-table-body">
                         </tbody>
-                    </table>
-                </div>
-            </section>
-
-            <section class="section">
-                <h3>📈 盘面分析</h3>
-                <div class="analysis-grid">
-                    <div class="chart-placeholder">
-                        <p>此处插入 K 线截图</p>
-                        </div>
-                    <div class="notes">
-                        <h4>市场情绪：</h4>
-                        <p>大盘缩量震荡，人工智能板块出现分化，资金流向低位华为概念。</p>
-                        <h4>核心反思：</h4>
-                        <ul>
-                            <li>宁德时代的止损非常及时，避免了后续阴跌。</li>
-                            <li>赛力斯卖出过早，以后应尝试分批止盈。</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <section class="section">
-                <h3>🧠 交易心得</h3>
-                <blockquote class="thought">
-                    "今天的市场告诉我们，尊重趋势比坚持逻辑更重要。当价格跌破关键支撑位时，必须无条件离场，不论你多么看好它的基本面。"
-                </blockquote>
-            </section>
-        </main>
+                </table>
+            </div>
+        </section>
     </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
