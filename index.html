@@ -2,123 +2,145 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>个人交易复盘系统</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>股票交易复盘</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
     <style>
         :root {
             --primary: #2563eb;
-            --profit: #ef4444; /* 盈利红 */
-            --loss: #22c55e;   /* 亏损绿 */
-            --bg: #f1f5f9;
+            --profit: #ef4444;
+            --loss: #22c55e;
+            --bg: #f4f7f9;
             --card: #ffffff;
             --text-main: #1e293b;
             --text-muted: #64748b;
         }
 
-        * { box-sizing: border-box; font-family: 'PingFang SC', system-ui, sans-serif; }
-        body { background: var(--bg); margin: 0; color: var(--text-main); }
+        * { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+        body { background: var(--bg); margin: 0; color: var(--text-main); -webkit-tap-highlight-color: transparent; }
 
-        /* 导航 */
+        /* 响应式导航 */
         .navbar { 
-            background: #fff; padding: 0.8rem 2rem; display: flex; 
+            background: #fff; padding: 0.75rem 1rem; display: flex; 
             justify-content: space-between; align-items: center;
             box-shadow: 0 1px 2px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100;
         }
+        .nav-links { display: flex; gap: 8px; }
         .nav-links button { 
-            background: none; border: 1px solid #e2e8f0; color: var(--text-muted);
-            padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; transition: 0.3s;
+            background: #f8fafc; border: 1px solid #e2e8f0; color: var(--text-muted);
+            padding: 0.5rem 0.8rem; border-radius: 8px; cursor: pointer; font-size: 0.9rem;
         }
         .nav-links button.active { background: var(--primary); color: white; border-color: var(--primary); }
 
-        .container { max-width: 1100px; margin: 2rem auto; padding: 0 1rem; }
+        .container { max-width: 1100px; margin: 1rem auto; padding: 0 0.8rem; }
 
-        /* 卡片 */
+        /* 卡片设计 */
         .card { 
-            background: var(--card); padding: 1.5rem; border-radius: 12px; 
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 1.5rem;
+            background: var(--card); padding: 1.2rem; border-radius: 12px; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.03); margin-bottom: 1rem;
         }
 
-        /* 统计数字 */
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
-        .stat-item { background: var(--card); padding: 1.2rem; border-radius: 12px; text-align: center; }
-        .stat-label { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem; }
-        .stat-value { font-size: 1.6rem; font-weight: 800; }
+        /* 统计数字：移动端自动单列或双列 */
+        .stats-grid { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); /* 默认两列 */
+            gap: 0.8rem; 
+            margin-bottom: 1rem; 
+        }
+        
+        /* 手机端第一个统计卡片占满整行（强调总资产） */
+        .stat-item:first-child { grid-column: span 2; }
+        
+        .stat-item { background: var(--card); padding: 1rem; border-radius: 12px; text-align: center; border: 1px solid #f1f5f9; }
+        .stat-label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.4rem; }
+        .stat-value { font-size: 1.3rem; font-weight: 800; }
 
-        /* 图表 */
-        .chart-container { position: relative; height: 380px; width: 100%; }
+        /* 图表容器：手机上高度调小一点 */
+        .chart-container { position: relative; height: 300px; width: 100%; }
 
-        /* 表格 */
-        .table-wrapper { overflow-x: auto; }
-        table { width: 100%; border-collapse: collapse; }
-        th { background: #f8fafc; text-align: left; padding: 12px; font-size: 0.9rem; color: var(--text-muted); }
-        td { padding: 12px; border-bottom: 1px solid #f1f5f9; }
+        /* 移动端表格适配：水平滚动 */
+        .table-wrapper { 
+            overflow-x: auto; 
+            -webkit-overflow-scrolling: touch; /* 流畅滚动 */
+            margin: 0 -1.2rem; /* 负边距让滚动条触及边缘 */
+            padding: 0 1.2rem;
+        }
+        table { width: 100%; border-collapse: collapse; min-width: 500px; /* 保证表格内容不被挤压 */ }
+        th { background: #f8fafc; text-align: left; padding: 10px; font-size: 0.8rem; color: var(--text-muted); }
+        td { padding: 10px; border-bottom: 1px solid #f8fafc; font-size: 0.9rem; }
 
-        /* 列表项 */
+        /* 历史记录列表项 */
         .history-item { 
-            display: flex; justify-content: space-between; padding: 1rem;
-            border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 0.8rem;
-            cursor: pointer; transition: 0.2s; background: white;
+            display: flex; justify-content: space-between; padding: 1.1rem;
+            border: 1px solid #e2e8f0; border-radius: 10px; margin-bottom: 0.8rem;
+            background: white; align-items: center;
         }
-        .history-item:hover { border-color: var(--primary); background: #f8fafc; }
 
-        /* 辅助类 */
+        /* 详情页日期选择 */
+        .date-header {
+            display: flex; flex-direction: column; gap: 0.8rem; margin-bottom: 1rem;
+        }
+        input[type="date"] { 
+            width: 100%; height: 44px; /* 移动端手指高度 */
+            border: 1px solid #ddd; border-radius: 8px; padding: 0 10px; font-size: 1rem;
+        }
+
         .profit { color: var(--profit); }
         .loss { color: var(--loss); }
-        .badge { padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; color: white; font-weight: bold; }
-        .bg-profit { background: var(--profit); }
-        .bg-loss { background: var(--loss); }
+        .badge { padding: 2px 6px; border-radius: 4px; font-size: 0.7rem; color: white; }
+
+        /* 媒体查询：适配屏幕宽度小于 480px 的手机 */
+        @media (max-width: 480px) {
+            .stat-value { font-size: 1.1rem; }
+            .navbar { padding: 0.6rem 0.8rem; }
+            .logo { font-size: 1.1rem !important; }
+            .chart-container { height: 250px; }
+        }
     </style>
 </head>
 <body>
 
 <nav class="navbar">
-    <div style="font-weight: 900; color: var(--primary); font-size: 1.3rem;">TRADE OS</div>
+    <div class="logo" style="font-weight: 900; color: var(--primary); font-size: 1.2rem;">TRADE LOG</div>
     <div class="nav-links">
-        <button id="nav-home" class="active" onclick="switchView('home')">首页汇总</button>
-        <button id="nav-detail" onclick="switchView('detail')">每日复盘</button>
+        <button id="nav-home" class="active" onclick="switchView('home')">汇总</button>
+        <button id="nav-detail" onclick="switchView('detail')">详情</button>
     </div>
 </nav>
 
 <div class="container">
     <div id="view-home">
         <div class="stats-grid">
-            <div class="stat-item"><div class="stat-label">当前总净值</div><div class="stat-value">¥108,330</div></div>
-            <div class="stat-item"><div class="stat-label">本月累计盈亏</div><div class="stat-value profit">+¥8,330</div></div>
-            <div class="stat-item"><div class="stat-label">月度胜率</div><div class="stat-value">62.5%</div></div>
+            <div class="stat-item"><div class="stat-label">总净值</div><div class="stat-value">¥108,330</div></div>
+            <div class="stat-item"><div class="stat-label">本月盈亏</div><div class="stat-value profit">+8,330</div></div>
+            <div class="stat-item"><div class="stat-label">胜率</div><div class="stat-value">62%</div></div>
         </div>
 
         <div class="card">
-            <h3 style="margin-top:0">📈 资产走势图</h3>
+            <h4 style="margin:0 0 1rem 0">📈 资产走势图</h4>
             <div class="chart-container">
                 <canvas id="assetChart"></canvas>
             </div>
         </div>
 
-        <div class="card">
-            <h3 style="margin-top:0">📅 历史记录</h3>
-            <div id="history-list"></div>
-        </div>
+        <h4 style="margin: 1.5rem 0 0.8rem 0.2rem">📅 历史复盘</h4>
+        <div id="history-list"></div>
     </div>
 
     <div id="view-detail" style="display: none;">
-        <div class="card" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-            <div>
-                <label style="font-size: 0.9rem; font-weight: bold;">选择复盘日期：</label>
-                <input type="date" id="date-selector" style="padding: 0.5rem; border-radius: 6px; border: 1px solid #ddd;" onchange="loadDetail(this.value)">
-            </div>
-            <h2 id="detail-date-display" style="margin:0">2023-10-27 复盘</h2>
+        <div class="card date-header">
+            <input type="date" id="date-selector" onchange="loadDetail(this.value)">
+            <h3 id="detail-date-display" style="margin:0; font-size: 1.1rem;">选择日期查看详情</h3>
         </div>
 
         <div class="stats-grid">
             <div class="stat-item"><div class="stat-label">当日盈亏</div><div id="detail-profit" class="stat-value">--</div></div>
-            <div class="stat-item"><div class="stat-label">成交笔数</div><div id="detail-count" class="stat-value">0</div></div>
-            <div class="stat-item"><div class="stat-label">情绪压力</div><div class="stat-value">低 (平稳)</div></div>
+            <div class="stat-item"><div class="stat-label">笔数</div><div id="detail-count" class="stat-value">0</div></div>
         </div>
 
         <div class="card">
-            <h3 style="margin-top:0">📜 成交明细</h3>
+            <h4 style="margin:0 0 1rem 0">📜 交易明细 (左右滑动查看)</h4>
             <div class="table-wrapper">
                 <table>
                     <thead>
@@ -132,14 +154,14 @@
 </div>
 
 <script>
-    // 模拟数据源
+    // 数据逻辑保持不变
     const tradeData = {
         "2023-10-27": { profit: "+5,230", count: 2, items: [
-            { name: "赛力斯", act: "买入", price: "82.50", change: "+3.5%", note: "突破形态确立" },
-            { name: "宁德时代", act: "卖出", price: "192.10", change: "-1.8%", note: "破均线止损" }
+            { name: "赛力斯", act: "买入", price: "82.5", change: "+3.5%", note: "形态突破" },
+            { name: "宁德时代", act: "卖出", price: "192", change: "-1.8%", note: "破位止损" }
         ]},
         "2023-10-26": { profit: "-1,100", count: 1, items: [
-            { name: "贵州茅台", act: "卖出", price: "1750", change: "-0.5%", note: "大盘环境不佳，防御为主" }
+            { name: "贵州茅台", act: "卖出", price: "1750", change: "-0.5%", note: "缩减仓位" }
         ]}
     };
 
@@ -149,7 +171,6 @@
         { d: '10-27', v: 108330 }
     ];
 
-    // 初始化图表
     function renderChart() {
         const ctx = document.getElementById('assetChart').getContext('2d');
         const maxVal = Math.max(...assetCurve.map(o => o.v));
@@ -165,33 +186,29 @@
                     backgroundColor: 'rgba(37, 99, 235, 0.05)',
                     fill: true,
                     tension: 0.4,
-                    pointRadius: 6,
-                    pointBackgroundColor: (c) => c.raw === maxVal ? '#ef4444' : '#fff'
+                    pointRadius: 4
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                layout: { padding: { top: 35 } },
                 plugins: {
                     legend: { display: false },
                     datalabels: {
                         align: 'top',
-                        offset: 10,
-                        font: { weight: 'bold', size: 12 },
-                        formatter: (v) => '¥' + (v/1000).toFixed(1) + 'k',
-                        color: (c) => c.raw === maxVal ? '#ef4444' : '#64748b'
+                        formatter: (v) => (v/1000).toFixed(1) + 'k',
+                        font: { size: 10, weight: 'bold' },
+                        color: (c) => c.raw === maxVal ? '#ef4444' : '#94a3b8'
                     }
                 },
                 scales: {
-                    y: { grid: { color: '#f1f5f9' }, ticks: { callback: v => v/10000 + '万' } },
-                    x: { grid: { display: false } }
+                    y: { ticks: { font: { size: 10 } }, grid: { color: '#f1f5f9' } },
+                    x: { ticks: { font: { size: 10 } }, grid: { display: false } }
                 }
             }
         });
     }
 
-    // 视图切换
     function switchView(view) {
         document.getElementById('view-home').style.display = view === 'home' ? 'block' : 'none';
         document.getElementById('view-detail').style.display = view === 'detail' ? 'block' : 'none';
@@ -199,12 +216,10 @@
         document.getElementById('nav-detail').className = view === 'detail' ? 'active' : '';
     }
 
-    // 加载详情数据
     function loadDetail(date) {
         const data = tradeData[date];
         const table = document.getElementById('detail-table');
-        document.getElementById('detail-date-display').innerText = date + " 复盘";
-        
+        document.getElementById('detail-date-display').innerText = date + " 复盘总结";
         if(data) {
             document.getElementById('detail-profit').innerText = "¥" + data.profit;
             document.getElementById('detail-profit').className = "stat-value " + (data.profit.includes('+') ? 'profit' : 'loss');
@@ -212,27 +227,24 @@
             table.innerHTML = data.items.map(i => `
                 <tr>
                     <td><b>${i.name}</b></td>
-                    <td><span class="badge ${i.act==='买入'?'bg-profit':'bg-loss'}">${i.act}</span></td>
+                    <td><span class="badge ${i.act==='买入'?'background:#ef4444':'background:#2563eb'}">${i.act}</span></td>
                     <td>${i.price}</td>
                     <td class="${i.change.includes('+')?'profit':'loss'}">${i.change}</td>
-                    <td style="color:#64748b; font-size:0.85rem">${i.note}</td>
+                    <td style="color:#64748b; font-size:0.75rem">${i.note}</td>
                 </tr>
             `).join('');
         } else {
-            document.getElementById('detail-profit').innerText = "无数据";
-            document.getElementById('detail-count').innerText = "0";
-            table.innerHTML = `<tr><td colspan="5" style="text-align:center; padding:2rem; color:#94a3b8">该日期暂无记录</td></tr>`;
+            table.innerHTML = `<tr><td colspan="5" style="text-align:center; padding:2rem; color:#94a3b8">暂无数据</td></tr>`;
         }
     }
 
-    // 首页列表渲染
     function renderHistory() {
         const container = document.getElementById('history-list');
         container.innerHTML = Object.keys(tradeData).reverse().map(date => `
             <div class="history-item" onclick="quickView('${date}')">
-                <span style="font-weight:bold">${date} 交易总结</span>
+                <span style="font-size:0.95rem; font-weight:600">${date}</span>
                 <span class="${tradeData[date].profit.includes('+')?'profit':'loss'}" style="font-weight:800">
-                    ${tradeData[date].profit}
+                    ${tradeData[date].profit} >
                 </span>
             </div>
         `).join('');
