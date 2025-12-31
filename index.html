@@ -3,80 +3,305 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>股票交易复盘系统</title>
-    <link rel="stylesheet" href="style.css">
+    <title>股票交易复盘系统 - Gemini Pro</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --profit: #ef4444; /* A股习惯：红涨 */
+            --loss: #22c55e;   /* A股习惯：绿跌 */
+            --bg: #f8fafc;
+            --text: #1e293b;
+            --card: #ffffff;
+        }
+
+        * { box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; }
+
+        body { background: var(--bg); margin: 0; color: var(--text); line-height: 1.6; }
+
+        /* 导航栏 */
+        .navbar { 
+            background: #fff; 
+            padding: 0.8rem 2rem; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1); 
+            position: sticky; 
+            top: 0; 
+            z-index: 100; 
+        }
+
+        .nav-links button { 
+            background: none; 
+            border: 1px solid var(--primary); 
+            color: var(--primary); 
+            padding: 0.5rem 1.2rem; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            margin-left: 10px; 
+            transition: all 0.3s; 
+            font-weight: 500;
+        }
+
+        .nav-links button.active { background: var(--primary); color: white; }
+
+        .container { max-width: 1000px; margin: 2rem auto; padding: 0 1rem; }
+
+        /* 通用卡片样式 */
+        .section { 
+            background: var(--card); 
+            padding: 1.5rem; 
+            border-radius: 12px; 
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            margin-bottom: 1.5rem;
+        }
+
+        /* 首页统计 */
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 1.5rem; }
+        .stat-card { background: var(--card); padding: 1.5rem; border-radius: 12px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .stat-card h3 { margin: 0; font-size: 0.9rem; color: #64748b; }
+        .stat-card .value { font-size: 1.8rem; font-weight: 800; margin-top: 0.5rem; }
+
+        /* 图表容器 */
+        .chart-container { height: 350px; width: 100%; margin-top: 1rem; }
+
+        /* 历史列表 */
+        .history-item { 
+            background: #fff; 
+            padding: 1rem; 
+            margin-bottom: 0.8rem; 
+            border-radius: 8px; 
+            display: flex; 
+            justify-content: space-between; 
+            cursor: pointer; 
+            transition: 0.2s; 
+            border: 1px solid #e2e8f0; 
+        }
+        .history-item:hover { border-color: var(--primary); transform: translateX(4px); }
+
+        /* 详情页控制 */
+        .detail-controls { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem; }
+        input[type="date"] { padding: 0.5rem; border-radius: 6px; border: 1px solid #cbd5e1; outline: none; }
+
+        /* 表格样式 */
+        .table-wrapper { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+        th { background: #f1f5f9; text-align: left; padding: 12px; color: #475569; font-size: 0.9rem; }
+        td { padding: 12px; border-bottom: 1px solid #f1f5f9; }
+
+        /* 状态颜色 */
+        .profit { color: var(--profit); }
+        .loss { color: var(--loss); }
+        .badge { padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; color: white; }
+        .bg-profit { background: var(--profit); }
+        .bg-loss { background: var(--loss); }
+
+        @media (max-width: 600px) {
+            .navbar { padding: 1rem; }
+            .stats-grid { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="logo">📈 交易者日志</div>
-        <div class="nav-links">
-            <button onclick="showView('home')">首页汇总</button>
-            <button onclick="showView('detail')">每日复盘</button>
+
+<nav class="navbar">
+    <div class="logo" style="font-weight: 800; font-size: 1.2rem; color: var(--primary);">TRADE LOG</div>
+    <div class="nav-links">
+        <button id="btn-home" class="active" onclick="showView('home')">首页汇总</button>
+        <button id="btn-detail" onclick="showView('detail')">每日复盘</button>
+    </div>
+</nav>
+
+<div class="container">
+    <div id="view-home" class="view">
+        <div class="stats-grid">
+            <div class="stat-card"><h3>当前总资产</h3><div class="value">¥108,330</div></div>
+            <div class="stat-card"><h3>本月累计盈亏</h3><div class="value profit">+¥8,330</div></div>
+            <div class="stat-card"><h3>本月胜率</h3><div class="value">62.5%</div></div>
         </div>
-    </nav>
 
-    <div class="container">
-        <section id="view-home" class="view">
-            <header class="view-header">
-                <h1>资产概览</h1>
-            </header>
-            
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <h3>本月胜率</h3>
-                    <p class="value">64.5%</p>
-                </div>
-                <div class="stat-card">
-                    <h3>累计盈亏</h3>
-                    <p class="value profit">+¥42,800</p>
-                </div>
-                <div class="stat-card">
-                    <h3>月度交易额</h3>
-                    <p class="value">¥1,250,000</p>
-                </div>
+        <div class="section">
+            <h3>📈 资产净值走势 (Equity Curve)</h3>
+            <div class="chart-container">
+                <canvas id="assetChart"></canvas>
             </div>
+        </div>
 
-            <div class="history-list">
-                <h3>最近复盘记录</h3>
-                <div class="history-item" onclick="viewDate('2023-10-27')">
-                    <span>2023-10-27</span>
-                    <span class="profit">+¥5,230</span>
+        <div class="section">
+            <h3>📅 最近交易记录</h3>
+            <div id="history-list">
                 </div>
-                <div class="history-item" onclick="viewDate('2023-10-26')">
-                    <span>2023-10-26</span>
-                    <span class="loss">-¥1,100</span>
-                </div>
+        </div>
+    </div>
+
+    <div id="view-detail" class="view" style="display: none;">
+        <div class="detail-controls">
+            <div>
+                <label style="font-weight: 600;">复盘日期：</label>
+                <input type="date" id="date-picker" onchange="loadDayDetail(this.value)">
             </div>
-        </section>
+            <h2 id="detail-title" style="margin:0;">2023-10-27 复盘记录</h2>
+        </div>
 
-        <section id="view-detail" class="view" style="display: none;">
-            <header class="detail-header">
-                <div class="date-picker-group">
-                    <label for="review-date">选择日期：</label>
-                    <input type="date" id="review-date" value="2023-10-27" onchange="loadDataByDate(this.value)">
-                </div>
-                <h1>当日复盘明细</h1>
-            </header>
+        <div class="stats-grid">
+            <div class="stat-card"><h3>当日盈亏</h3><div id="day-profit" class="value profit">+¥5,230</div></div>
+            <div class="stat-card"><h3>操作数量</h3><div id="day-count" class="value">2 笔</div></div>
+            <div class="stat-card"><h3>执行评价</h3><div class="value">⭐ 优秀</div></div>
+        </div>
 
-            <div class="summary-cards">
-                <div class="card"><p>当日盈亏</p><h2 id="day-profit" class="profit">+¥5,230</h2></div>
-                <div class="card"><p>仓位</p><h2>65%</h2></div>
-                <div class="card"><p>状态</p><h2>✅ 严格执行纪律</h2></div>
-            </div>
-
-            <div class="section">
-                <h3>📜 交易明细</h3>
+        <div class="section">
+            <h3>📜 交易明细</h3>
+            <div class="table-wrapper">
                 <table>
                     <thead>
-                        <tr><th>标的</th><th>动作</th><th>价格</th><th>盈亏</th><th>备注</th></tr>
+                        <tr>
+                            <th>代码名称</th>
+                            <th>动作</th>
+                            <th>成交均价</th>
+                            <th>收益率</th>
+                            <th>逻辑/反思</th>
+                        </tr>
                     </thead>
-                    <tbody id="trade-table-body">
+                    <tbody id="detail-table-body">
                         </tbody>
                 </table>
             </div>
-        </section>
+        </div>
     </div>
+</div>
 
-    <script src="script.js"></script>
+<script>
+    // --- 数据定义 ---
+    const db = {
+        "2023-10-27": {
+            profit: "+¥5,230",
+            trades: [
+                { name: "赛力斯", type: "买入", price: "82.50", rate: "+3.5%", note: "放量突破前期高点" },
+                { name: "宁德时代", type: "止损", price: "192.10", rate: "-1.8%", note: "跌破关键位支撑" }
+            ]
+        },
+        "2023-10-26": {
+            profit: "-¥1,100",
+            trades: [
+                { name: "贵州茅台", type: "卖出", price: "1750.0", rate: "-0.5%", note: "震荡行情，收缩战线" }
+            ]
+        }
+    };
+
+    const assetHistory = [
+        { date: '10-20', val: 100000 },
+        { date: '10-21', val: 102500 },
+        { date: '10-22', val: 101800 },
+        { date: '10-23', val: 105000 },
+        { date: '10-24', val: 104200 },
+        { date: '10-26', val: 103100 },
+        { date: '10-27', val: 108330 }
+    ];
+
+    // --- 核心逻辑 ---
+
+    // 视图切换
+    function showView(view) {
+        document.querySelectorAll('.view').forEach(v => v.style.display = 'none');
+        document.querySelectorAll('.nav-links button').forEach(b => b.classList.remove('active'));
+        
+        document.getElementById(`view-${view}`).style.display = 'block';
+        document.getElementById(`btn-${view}`).classList.add('active');
+        
+        if(view === 'home') renderHistoryList();
+    }
+
+    // 初始化走势图
+    function initChart() {
+        const ctx = document.getElementById('assetChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: assetHistory.map(d => d.date),
+                datasets: [{
+                    label: '账户净值',
+                    data: assetHistory.map(d => d.val),
+                    borderColor: '#2563eb',
+                    backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                    fill: true,
+                    tension: 0.4,
+                    borderWidth: 3,
+                    pointRadius: 5,
+                    pointHoverRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: { 
+                    y: { grid: { color: '#f1f5f9' }, ticks: { callback: v => '¥' + v.toLocaleString() } },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+    }
+
+    // 渲染首页列表
+    function renderHistoryList() {
+        const list = document.getElementById('history-list');
+        list.innerHTML = Object.keys(db).sort().reverse().map(date => `
+            <div class="history-item" onclick="viewDetail('${date}')">
+                <span style="font-weight: 600;">${date} 复盘日志</span>
+                <span class="${db[date].profit.includes('+') ? 'profit' : 'loss'}" style="font-weight: 800;">
+                    ${db[date].profit}
+                </span>
+            </div>
+        `).join('');
+    }
+
+    // 加载详情
+    function loadDayDetail(date) {
+        const data = db[date];
+        const tableBody = document.getElementById('detail-table-body');
+        const profitEl = document.getElementById('day-profit');
+        const titleEl = document.getElementById('detail-title');
+        
+        titleEl.innerText = `${date} 复盘记录`;
+        
+        if (data) {
+            profitEl.innerText = data.profit;
+            profitEl.className = `value ${data.profit.includes('+') ? 'profit' : 'loss'}`;
+            document.getElementById('day-count').innerText = `${data.trades.length} 笔`;
+            
+            tableBody.innerHTML = data.trades.map(t => `
+                <tr>
+                    <td><strong>${t.name}</strong></td>
+                    <td><span class="badge ${t.type==='买入'?'bg-profit':'bg-loss'}">${t.type}</span></td>
+                    <td>${t.price}</td>
+                    <td class="${t.rate.includes('+')?'profit':'loss'}">${t.rate}</td>
+                    <td style="font-size: 0.85rem; color: #64748b;">${t.note}</td>
+                </tr>
+            `).join('');
+        } else {
+            tableBody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding: 3rem; color: #94a3b8;">暂无此日数据</td></tr>';
+            profitEl.innerText = "¥0";
+            document.getElementById('day-count').innerText = "0 笔";
+        }
+    }
+
+    // 从列表跳转
+    function viewDetail(date) {
+        document.getElementById('date-picker').value = date;
+        loadDayDetail(date);
+        showView('detail');
+    }
+
+    // 初始化启动
+    window.onload = () => {
+        initChart();
+        renderHistoryList();
+        // 默认填充选择器
+        document.getElementById('date-picker').value = "2023-10-27";
+        loadDayDetail("2023-10-27");
+    };
+</script>
+
 </body>
 </html>
